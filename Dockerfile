@@ -1,8 +1,4 @@
-FROM php:8.2-apache
-
-# Disable other MPMs and enable prefork
-RUN a2dismod mpm_event mpm_worker || true \
-    && a2enmod mpm_prefork
+FROM php:8.2-cli
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -18,22 +14,23 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
 
-# Enable Apache rewrite
-RUN a2enmod rewrite
-
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Copy project files
-COPY . /var/www/html
+COPY . /app
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Install PHP dependencies
+# Install dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Fix permissions
-RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache
 
-EXPOSE 80
+# Expose Railway port
+EXPOSE 8080
+
+# Start Laravel using built-in PHP server
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]

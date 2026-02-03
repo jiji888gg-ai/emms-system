@@ -10,7 +10,11 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "simplesoftwareio/simple-qrcode": "^4.2"
+        
     },
+
+
+
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
@@ -80,7 +84,11 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
+        },
+        
+        "platform": {
+            "ext-gd": "2.0"
+    }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

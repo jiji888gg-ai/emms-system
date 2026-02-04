@@ -15,9 +15,13 @@
 @endif
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h5 class="fw-bold mb-4">
+    <h5 class="fw-bold mb-0">
         <i class="bi bi-star me-2"></i> Student Merit List
     </h5>
+    
+    <a href="/admin/merit/export" class="btn btn-success">
+        <i class="bi bi-file-earmark-excel me-2"></i> Export to Excel
+    </a>
 </div>
 
 <!-- Search Form -->

@@ -56,6 +56,47 @@ class AdminController extends Controller
     return view('admin.merit.index', compact('students', 'search'));
 }
 
+public function exportMerit()
+{
+    $students = DB::table('students')
+        ->leftJoin('merit_logs', 'merit_logs.s_id', '=', 'students.s_id')
+        ->select(
+            'students.name',
+            'students.num_matrics',
+            DB::raw('COALESCE(SUM(merit_logs.points_added), 0) as total_merit')
+        )
+        ->groupBy('students.s_id', 'students.name', 'students.num_matrics')
+        ->orderByDesc('total_merit')
+        ->get();
+
+    $csvFileName = 'student-merit-list-' . date('Y-m-d') . '.csv';
+
+    $headers = [
+        "Content-type"        => "text/csv",
+        "Content-Disposition" => "attachment; filename=$csvFileName",
+        "Pragma"              => "no-cache",
+        "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+        "Expires"             => "0"
+    ];
+
+    $callback = function() use($students) {
+        $file = fopen('php://output', 'w');
+        fputcsv($file, ['No', 'Student Name', 'Matric No', 'Total Merit']);
+
+        foreach ($students as $index => $row) {
+            fputcsv($file, [
+                $index + 1,
+                $row->name,
+                $row->num_matrics,
+                $row->total_merit
+            ]);
+        }
+        fclose($file);
+    };
+
+    return response()->stream($callback, 200, $headers);
+}
+
 public function viewStudentMerit($id)
 {
     $student = Student::findOrFail($id);

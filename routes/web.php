@@ -77,6 +77,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/profile', [AdminController::class, 'profile']);
     Route::post('/profile', [AdminController::class, 'updateProfile']);
     Route::get('/merit', [AdminController::class, 'viewMerit']);
+    Route::get('/merit/export', [AdminController::class, 'exportMerit']);
     Route::get('/merit/{id}', [AdminController::class, 'viewStudentMerit']);
     Route::get('/organizers', [AdminController::class, 'organizers']);
     Route::get('/events', [AdminController::class, 'events']);

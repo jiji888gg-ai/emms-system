@@ -46,11 +46,14 @@
             <input type="number" step="any" name="location_long" class="form-control" required placeholder="e.g. 101.12345">
         </div>
         <div class="col-md-4 mb-3">
-            <label>Radius (Meters)</label>
+            <label>Radiusg(Meters)</label>
             <input type="number" name="radius_meter" class="form-control" required placeholder="e.g. 100">
         </div>
+        <a href="https://www.google.com/maps" target="_blank">
+            Open Google Maps
+        </a>
     </div>
-
+<br>
     <div class="mb-3">
         <label>Start Date & Time</label>
         <input type="datetime-local" name="start_time" class="form-control">

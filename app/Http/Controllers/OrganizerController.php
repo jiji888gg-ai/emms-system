@@ -80,6 +80,9 @@ $request->validate([
     'title'        => 'required',
     'description'  => 'required',
     'location_name'=> 'required',
+    'location_lat' => 'required|numeric',
+    'location_long'=> 'required|numeric',
+    'radius_meter' => 'required|integer|min:1',
     'start_time'   => 'required|date',
     'end_time'     => 'required|date|after_or_equal:start_time',
     'proposal'     => 'nullable|file|mimes:pdf|max:5120'
@@ -97,9 +100,9 @@ $data = [
 ];
 
 $data += [
-    'location_lat'  => 0,
-    'location_long' => 0,
-    'radius_meter'  => 0,
+    'location_lat'  => $request->location_lat,
+    'location_long' => $request->location_long,
+    'radius_meter'  => $request->radius_meter,
     'qr_code_token' => \Illuminate\Support\Str::random(32),
 ];
 
@@ -208,6 +211,9 @@ public function updateProposal(Request $request, $id)
         'title'        => 'required',
         'description'  => 'required',
         'location_name'=> 'required',
+        'location_lat' => 'required|numeric',
+        'location_long'=> 'required|numeric',
+        'radius_meter' => 'required|integer|min:1',
         'start_time'   => 'required|date',
         'end_time'     => 'required|date|after_or_equal:start_time',
         'proposal'     => 'nullable|file|mimes:pdf|max:5120'
@@ -216,6 +222,9 @@ public function updateProposal(Request $request, $id)
     $proposal->title = $request->title;
     $proposal->description = $request->description;
     $proposal->location_name = $request->location_name;
+    $proposal->location_lat = $request->location_lat;
+    $proposal->location_long = $request->location_long;
+    $proposal->radius_meter = $request->radius_meter;
     $proposal->start_time = \Carbon\Carbon::parse($request->start_time);
     $proposal->end_time = \Carbon\Carbon::parse($request->end_time);
 

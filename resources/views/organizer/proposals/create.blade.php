@@ -32,8 +32,23 @@
     <!-- removed merit_value input -->
 
     <div class="mb-3">
-        <label>Location</label>
-        <input type="text" name="location_name" class="form-control">
+        <label>Location Name</label>
+        <input type="text" name="location_name" class="form-control" required>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label>Latitude</label>
+            <input type="number" step="any" name="location_lat" class="form-control" required placeholder="e.g. 3.12345">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Longitude</label>
+            <input type="number" step="any" name="location_long" class="form-control" required placeholder="e.g. 101.12345">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Radius (Meters)</label>
+            <input type="number" name="radius_meter" class="form-control" required placeholder="e.g. 100">
+        </div>
     </div>
 
     <div class="mb-3">

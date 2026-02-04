@@ -22,8 +22,23 @@
         </div>
 
         <div class="mb-3">
-            <label>Location</label>
+            <label>Location Name</label>
             <input type="text" name="location_name" class="form-control" value="{{ old('location_name', $proposal->location_name) }}" required>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label>Latitude</label>
+                <input type="number" step="any" name="location_lat" class="form-control" value="{{ old('location_lat', $proposal->location_lat) }}" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Longitude</label>
+                <input type="number" step="any" name="location_long" class="form-control" value="{{ old('location_long', $proposal->location_long) }}" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Radius (Meters)</label>
+                <input type="number" name="radius_meter" class="form-control" value="{{ old('radius_meter', $proposal->radius_meter) }}" required>
+            </div>
         </div>
 
         <div class="mb-3">
